@@ -1,4 +1,11 @@
 - hosts: dev
   gather_facts: no
   roles:
-    - { role: dotfiles, tags: dotfiles }
+    - { role: base, tags: base }
+    #- { role: mysql, tags: mysql }
+    #- { role: mongodb, tags: mongodb }
+    #- { role: memcached, tags: memcached }
+    #- { role: redis, tags: redis }
+    #- { role: rvm, tags: rvm }
+    #- { role: dotfiles, tags: dotfiles }
+

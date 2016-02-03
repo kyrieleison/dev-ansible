@@ -1,0 +1,42 @@
+- name: Yum -> add EPEL
+  yum: name=http://ftp.jaist.ac.jp/pub/Linux/Fedora/epel/6/x86_64/epel-release-6-8.noarch.rpm
+
+- name: Yum -> enable EPEL
+  ini_file: dest=/etc/yum.repos.d/epel.repo
+    section=epel
+    option=enabled
+    value=1
+
+- name: Yum -> add Remi
+  yum:  name=http://rpms.famillecollet.com/enterprise/remi-release-6.rpm
+
+- name: Yum -> enable Remi
+  ini_file: dest=/etc/yum.repos.d/remi.repo
+    section=remi
+    option=enabled
+    value=1
+
+- name: Yum install -> basic command line tools
+  yum: name={{ item }}
+  with_items:
+    - gcc
+    - gcc-c++
+    - patch
+    - readline
+    - readline-devel
+    - zlib
+    - zlib-devel
+    - openssl-devel
+    - kernel-devel
+    - httpd
+    - httpd-devel
+    - curl
+    - curl-devel
+    - wget
+    - setuptool
+    - ntsysv
+    - system-config-firewall-tui
+    - system-config-network-tui
+    - git
+    - zsh
+

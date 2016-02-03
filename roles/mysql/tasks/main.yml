@@ -1,0 +1,26 @@
+- name: Yum install -> MySQL RPM
+  yum: name=http://dev.mysql.com/get/mysql-community-release-el6-5.noarch.rpm state=present
+
+- name: Yum install -> MySQL packages
+  yum: name={{ item }} state=present
+  with_items:
+    - mysql-community-libs-compat
+    - mysql-community-libs
+    - mysql-community-client
+    - mysql-community-server
+    - mysql-community-devel
+
+- name: Generate mysql_server-id
+  shell: ip route get 8.8.8.8 | grep src | awk '{print $NF}' | awk -F. '{print $3 * 256 + $4}'
+  register: mysql_server_id
+
+- name: File generate -> my.cnf
+  template: src=my.cnf.j2 dest=/etc/my.cnf force=yes owner=root group=root mode=644
+
+- name: File create -> /var/log/mysql_general.log
+  file: path=/var/log/mysql_general.log owner=mysql group=mysql mode=644 state=touch
+- name: File create -> /var/log/mysql_slow_query.log
+  file: path=/var/log/mysql_slow_query.log owner=mysql group=mysql mode=644 state=touch
+
+- name: MySQL Server -> enable
+  service: name=mysqld enabled=yes state=restarted
