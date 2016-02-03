@@ -1,0 +1,6 @@
+mysql_innodb_data_file_path:   ibdata1:1G:autoextend
+mysql_innodb_buffer_pool_size: 256M
+mysql_innodb_log_buffer_size:  16MB
+mysql_innodb_log_file_size:    128MB
+
+mysql_prompt: '\u@\h:\d\_\R:\m:\\s> '

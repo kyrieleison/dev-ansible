@@ -1,0 +1,9 @@
+- name: Yum install -> jemalloc
+  yum: name=jemalloc
+
+- name: Yum install -> redis
+  yum: name=redis
+
+- name: redis -> enable
+  service: name=redis enabled=yes state=restarted
+

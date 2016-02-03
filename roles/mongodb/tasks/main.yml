@@ -1,0 +1,12 @@
+- name: Yum -> enable 10gen
+  copy: src=10gen.repo dest=/etc/yum.repos.d/10gen.repo
+
+- name: Yum install -> mongodb
+  yum: name={{ item }}
+  with_items:
+    - mongo-10gen
+    - mongo-10gen-server
+
+- name: mongodb -> enable
+  service: name=mongod enabled=yes state=restarted
+
